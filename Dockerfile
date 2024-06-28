@@ -1,14 +1,11 @@
-# Use the latest Ubuntu image
-FROM ubuntu:latest
+# Use the latest Python image
+FROM python:3.9-slim
 
 # Set environment variables to avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update and install required packages
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    python3-dev \
     build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -17,8 +14,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Upgrade pip and install JupyterLab
-RUN pip3 install --no-cache-dir --upgrade pip
-RUN pip3 install --no-cache-dir jupyterlab
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir jupyterlab
 
 # Expose port 8080
 EXPOSE 8080
